@@ -1,45 +1,46 @@
 "use client";
 
+import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";  //correct  Import for useRouter
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { toast } from "react-hot-toast";
+import toast, { Toaster } from 'react-hot-toast';
+
+ // Toast Alert if No details are filled
+const signUpFailed = () => toast.error("Signup failed! Fill in all your details");
 
 export default function SignUpPage() {
 
     const router = useRouter();
 
-    const [user, setUser] = useState({
+    const [user, setUser] = React.useState({
         email: "",
         password: "",
         username: "",
     });
 
-    const [buttonDisabled, setButtonDisabled] = useState(true);
+    const [signUpDisabled, setSignUpDisabled] = useState(true);  //Signup disabled by default
 
-    const SignUp = async () => {
+    const signUp = async () => {
         try {
-            
+            // add a Loading Spinner
+            const response = await axios.post("/api/users/signup", user);
+            console.log("Signup success", response.data);
+            router.push('/login');  //push user to login page
+
         } catch (error:any) {
-            toast.error(error.message)
-        } finally {
-            //add a spinner loading
+            console.log("Signup failed!", error.message);
+            toast.error("Signup failed!");
         }
     }
 
-    //Alert if No details are filled
-    function noSignUp() {
-        alert("Make sure to fill all your details!");
-    }
-
-    //Enable button click after all details are entered
+    //Enable SignUp after all the details are entered
     useEffect(() => {
-      if(user.email.length > 0 && user.password.length > 0 && user.username.length > 0) {
-        setButtonDisabled(false);
-      }
-
-    }, [user])
+        if(user.email.length > 0 && user.password.length > 0 && user.username.length > 0) {
+            setSignUpDisabled(false);
+        }
+    }, [user]);
     
     return (
         <div className="flex flex-col items-center justify-center min-h-screen py-2">
@@ -65,8 +66,9 @@ export default function SignUpPage() {
                 placeholder="Password" className="m-2 p-1 rounded-lg text-sm border text-black"
             />
 
-            <button onClick={buttonDisabled ? noSignUp : SignUp} className={buttonDisabled ? 'py-1 px-3 mt-2 text-gray-400 bg-gray-600 rounded-lg': 'py-1 px-3 mt-2 bg-sky-700 rounded-lg'}>
-               Signup
+            <button onClick={signUpDisabled ? signUpFailed : signUp} className='py-1 px-3 mt-2 bg-sky-700 rounded-lg'>
+                Signup
+               <Toaster />
             </button>
 
             <div className="flex gap-3 mt-7">

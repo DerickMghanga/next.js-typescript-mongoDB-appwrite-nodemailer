@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 
-export async function mongooseConnect() {
+export async function connect() {
     try{
-        mongoose.connect(process.env.MONGO_URL!);   //when using TypeScript add '!' .bt it will always resolve(available)
+        mongoose.connect(process.env.MONGO_URI!);   //when using TypeScript add '!' .bt it will always resolve(available)
         const connection = mongoose.connection;
 
         connection.on('connected', () => {   //  '.on' listens to events plus a callback function
