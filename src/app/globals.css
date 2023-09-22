@@ -20,3 +20,8 @@ body {
   background-color: #004d99;
   @apply text-white;
 }
+
+input {
+  background-color: #ccc;
+  font-weight: bold;
+}
