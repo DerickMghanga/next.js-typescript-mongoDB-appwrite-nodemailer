@@ -26,7 +26,9 @@ export default function SignUpPage() {
         try {
             // add a Loading Spinner
             const response = await axios.post("/api/users/signup", user);
-            console.log("Signup success", response.data);
+            // console.log("Signup success", response.data);
+
+            toast.success(response.data.message);
             router.push('/login');  //push user to login page
 
         } catch (error:any) {

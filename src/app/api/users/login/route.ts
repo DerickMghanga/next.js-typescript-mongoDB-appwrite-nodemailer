@@ -37,12 +37,12 @@ export async function POST(request: NextRequest) {
         //create the token for the User
         const token = await jwt.sign(
             tokenData,
-            process.env.TOKEN_SECRET!,    //exclamation >> MUST/Always be available
+            process.env.TOKEN_SECRET!, // TypeScript compiler ignores the possibility of it being undefined
             {expiresIn: "1d"}
         );
         
         //set token to the User's cookie
-        const response = NextResponse.json({   // NextResponse has access to the cookies.
+        const response = NextResponse.json({   // NextResponse interacts with the cookies.
             message: "Login successfull!",     // Next.js documentation
             success: true,
         });
