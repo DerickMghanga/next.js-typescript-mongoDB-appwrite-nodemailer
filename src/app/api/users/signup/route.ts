@@ -33,9 +33,8 @@ export async function POST(request: NextRequest) { //handle the request
 
         // console.log(newUser._id);
 
-        //send verication email >> @helpers/mailer.ts
+        //send verification email >> @helpers/mailer.ts
         await sendEmail({email, emailType: "VERIFY", userId: newUser._id})
-
 
         //send response to client
         return NextResponse.json({

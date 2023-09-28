@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
     try {
         const reqBody = await request.json();
         const {token} = reqBody;
-        console.log({token});
+        // console.log({token});
 
         const user = await User.findOne({verifyToken:token, verifyTokenExpiry: {$gt: Date.now()}})
 
@@ -17,11 +17,11 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({error: "User not found!"}, {status: 400});
         }
         
-        console.log(user);
+        // console.log(user);
 
         //update user info in the DB
         user.isVerified = true;
-        user.verifyToken = undefined;
+        user.verifyToken = undefined;  //clear the entry
         user.verifyTokenExpiry = undefined;
 
         await user.save();

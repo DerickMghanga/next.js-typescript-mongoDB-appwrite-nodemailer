@@ -29,7 +29,7 @@ export default function SignUpPage() {
             // console.log("Signup success", response.data);
 
             toast.success(response.data.message);
-            router.push('/login');  //redirects user to login page
+            router.push('/verifyemail');  //redirects user to verification page
 
         } catch (error:any) {
             console.log("Signup failed!", error.message);

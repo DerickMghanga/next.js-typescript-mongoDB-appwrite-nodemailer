@@ -5,7 +5,7 @@ export function middleware(request: NextRequest) {
     const path = request.nextUrl.pathname;
 
     //define the public paths (paths accessed by anyone on the web)
-    const isPublicPath = path === '/login'  || path === '/signup';
+    const isPublicPath = path === '/login'  || path === '/signup' || path === '/verifyemail' || path === '/security' || path === '/changepassword';
 
     //extract cookies from the request
     const token = request.cookies.get('token')?.value || ''; //it might or not be available 'optional'
@@ -20,7 +20,7 @@ export function middleware(request: NextRequest) {
     }
 }
  
-//matcher allows you to filter Middleware to run on specific paths.
+//matcher allows you to filter Middleware to run on specific paths.(track all paths)
 export const config = {
   matcher: [
     '/',
@@ -28,5 +28,8 @@ export const config = {
     '/profile/:path*',
     '/login',
     '/signup',
+    '/verifyemail',
+    '/security',
+    '/changepassword',
   ],
 }

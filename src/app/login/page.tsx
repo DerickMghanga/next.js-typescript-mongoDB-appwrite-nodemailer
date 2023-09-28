@@ -28,7 +28,7 @@ export default function LogInPage() {
             router.push('/profile');
         } catch (error: any) {
             console.log("Login failed!", error.message);
-            toast.error(error.message);
+            toast.error("Login Falied!");
         }
     }
 
@@ -64,6 +64,11 @@ export default function LogInPage() {
             <div className="flex gap-3 mt-7">
                 <p>Not yet Registered?  </p>
                 <Link href="/signup" className="text-blue-500 rounded-sm">Signup</Link>
+            </div>
+            
+            <div className="flex gap-3 mt-7">
+                <p>Forgot password?  </p>
+                <Link href="/security" className="text-blue-500 rounded-sm">Click here!</Link>
             </div>
             
 

@@ -6,7 +6,7 @@ export async function GET(){
     try {
         // Create a Response that clears the cookies in the client
         const response = NextResponse.json({
-            message: "Logout Successfull !",
+            message: "Logout Successfull!",
             success: true,
         })
 
