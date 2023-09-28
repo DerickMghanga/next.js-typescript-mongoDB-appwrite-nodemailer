@@ -28,8 +28,9 @@ export default function ProfilePage() {
 
     const getUserDetails = async () => {
         const res = await axios.get('/api/users/userInfo'); //fetch user details from cookies(token)
-        console.log(res.data.userInfo);
+        // console.log(res.data.userInfo);
 
+        toast.success(res.data.message);
         setUserId(res.data.userInfo._id);
     }
 

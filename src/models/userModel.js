@@ -25,8 +25,8 @@ const userSchema = new Schema({
     },
     forgotPasswordToken: String,
     forgotPasswordTokenExpiry: Date,
-    verifiedToken: String,
-    verifiedTokenExpiry: Date,
+    verifyToken: String,
+    verifyTokenExpiry: Date,
 })
 
-export const User = models.User || model('User', userSchema);
+export const User = models?.User || model('User', userSchema);
